@@ -1,3 +1,21 @@
 LinuxCNC HAL component for CANopen communications using CANFestival
 -------------------------------------------------------------------
 
+Check canopen.hal to see load parameters of the component.
+Load parameters are intended to:
+-Map input and output pins of the component to certain objects of
+the remote-device object dictionary
+-Assign an ID to this device (master)
+-Choose remote device ID to communicate 
+-Establish a repetition rate for CANopen sync-frames (network protocol may
+have other sync-frame rep.rate, like RTnet does)
+-Select a number of CANopen sync-frames that slave and master should wait
+between consecutive transmissions (this number need not be the same for
+slave and master).
+
+When the component is loaded tries to configure the slave device
+to periodically transmit frames containing the values of slave's objects passed
+with the 'output=' parameter list, these values will be put on the component's
+output pins.
+It also starts to periodically send values of the input pins to the slave's
+objects which have been passed with the 'input=' parameter list.
